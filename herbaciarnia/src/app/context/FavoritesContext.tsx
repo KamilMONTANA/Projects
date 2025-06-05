@@ -42,10 +42,9 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favoriteProducts, setFavoriteProducts] = useState<Product[]>(() => {
     // Initialize state from localStorage
     if (typeof window !== 'undefined') {
-      const storedFavorites = localStorage.getItem('favoriteProducts');
+      const storedFavorites = localStorage.getItem('favorites');
       if (storedFavorites) {
         try {
-          setFavoriteProducts
           const parsedFavorites: Product[] = JSON.parse(storedFavorites);
           // Basic validation to ensure it's an array of products
           if (Array.isArray(parsedFavorites) && parsedFavorites.every(p => p && typeof p.id === 'number' && typeof p.name === 'string')) {
@@ -99,5 +98,3 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
 
   return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
 };
-
-<p className="text-emerald-600">Nie znaleziono produktów spełniających kryteria wyszukiwania.</p>
