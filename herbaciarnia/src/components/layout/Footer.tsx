@@ -10,39 +10,38 @@ import {
 
 const footerLinks = {
   shop: [
-    { name: 'Wszystkie produkty', href: '/shop' },
-    { name: 'Herbata czarna', href: '/shop?category=czarna' },
-    { name: 'Herbata zielona', href: '/shop?category=zielona' },
-    { name: 'Herbata biała', href: '/shop?category=biala' },
-    { name: 'Akcesoria', href: '/shop?category=akcesoria' }
+    { name: 'Wszystkie produkty', href: '' },
+    { name: 'Herbata czarna', href: '' },
+    { name: 'Herbata zielona', href: '' },
+    { name: 'Herbata biała', href: '' },
+    { name: 'Akcesoria', href: '' }
   ],
   company: [
-    { name: 'O nas', href: '/about' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Kontakt', href: '/contact' },
-    { name: 'Newsletter', href: '/newsletter' },
-    { name: 'Kariera', href: '/career' }
+    { name: 'O nas', href: '' },
+    { name: 'Blog', href: '' },
+    { name: 'Kontakt', href: '' },
+    { name: 'Newsletter', href: '' },
+    { name: 'Kariera', href: '' }
   ],
   customer: [
-    { name: 'Mój profil', href: '/profile' },
-    { name: 'Historia zamówień', href: '/profile?tab=orders' },
-    { name: 'Ulubione', href: '/favorites' },
-    { name: 'Koszyk', href: '/cart' },
-    { name: 'Pomoc', href: '/help' }
+    { name: 'Mój profil', href: '' },
+    { name: 'Historia zamówień', href: '' },
+    { name: 'Ulubione', href: '' },
+    { name: 'Koszyk', href: '' },
+    { name: 'Pomoc', href: '' }
   ],
   legal: [
-    { name: 'Regulamin', href: '/terms' },
-    { name: 'Polityka prywatności', href: '/privacy' },
-    { name: 'Polityka cookies', href: '/cookies' },
-    { name: 'Zwroty i reklamacje', href: '/returns' },
-    { name: 'Dostawa i płatność', href: '/shipping' }
+    { name: 'Regulamin', href: '' },
+    { name: 'Polityka prywatności', href: '' },
+    { name: 'Polityka cookies', href: '' },
+    { name: 'Zwroty i reklamacje', href: '' },
+    { name: 'Dostawa i płatność', href: '' }
   ]
 };
 
 const socialLinks = [
   {
     name: 'Facebook',
-    href: 'https://facebook.com/herbaciarnia',
     icon: (props: any) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
@@ -51,7 +50,6 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    href: 'https://instagram.com/herbaciarnia',
     icon: (props: any) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323C5.902 8.198 7.053 7.708 8.35 7.708s2.448.49 3.323 1.297c.876.876 1.366 2.027 1.366 3.324s-.49 2.448-1.366 3.323c-.875.876-2.026 1.366-3.323 1.366zm7.718 0c-1.297 0-2.448-.49-3.323-1.297-.876-.875-1.366-2.026-1.366-3.323s.49-2.448 1.366-3.323c.875-.876 2.026-1.366 3.323-1.366s2.448.49 3.323 1.366c.876.875 1.366 2.026 1.366 3.323s-.49 2.448-1.366 3.323c-.875.876-2.026 1.366-3.323 1.366z" />
@@ -60,7 +58,6 @@ const socialLinks = [
   },
   {
     name: 'YouTube',
-    href: 'https://youtube.com/herbaciarnia',
     icon: (props: any) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
@@ -69,7 +66,6 @@ const socialLinks = [
   },
   {
     name: 'Twitter',
-    href: 'https://twitter.com/herbaciarnia',
     icon: (props: any) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
@@ -146,12 +142,11 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.shop.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+                  <span
+                    className="text-gray-300 cursor-default"
                   >
                     {link.name}
-                  </Link>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -163,12 +158,11 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+                  <span
+                    className="text-gray-300 cursor-default"
                   >
                     {link.name}
-                  </Link>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -180,12 +174,11 @@ export default function Footer() {
             <ul className="space-y-3">
               {footerLinks.customer.map((link) => (
                 <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-gray-300 hover:text-emerald-400 transition-colors duration-200"
+                  <span
+                    className="text-gray-300 cursor-default"
                   >
                     {link.name}
-                  </Link>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -203,7 +196,6 @@ export default function Footer() {
                 return (
                   <a
                     key={social.name}
-                    href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-emerald-400 transition-colors duration-200"
@@ -218,13 +210,12 @@ export default function Footer() {
             {/* Legal Links */}
             <div className="flex flex-wrap justify-center md:justify-end space-x-6">
               {footerLinks.legal.map((link) => (
-                <Link
+                <span
                   key={link.name}
-                  href={link.href}
-                  className="text-sm text-gray-400 hover:text-emerald-400 transition-colors duration-200"
+                  className="text-sm text-gray-400 cursor-default"
                 >
                   {link.name}
-                </Link>
+                </span>
               ))}
             </div>
           </div>
@@ -233,7 +224,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Herbaciarnia. Wszystkie prawa zastrzeżone.
+            © {new Date().getFullYear()} WebDev13 - Profesjonalne strony internetowe. Wszystkie prawa zastrzeżone.
           </p>
           <p className="text-gray-500 text-xs mt-2">
             Sklep internetowy stworzony z pasją do herbaty i najwyższej jakości obsługi klienta.
