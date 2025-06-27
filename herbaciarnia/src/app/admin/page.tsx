@@ -71,6 +71,7 @@ const mockOrders: Order[] = [
 ];
 
 export default function AdminPage() {
+  const products = getAllProducts();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [orders, setOrders] = useState<Order[]>(mockOrders);
   const [stats, setStats] = useState<DashboardStats>({
