@@ -206,47 +206,24 @@ export default function BlogPage() {
                   </div>
                 </div>
                 
-                <div className="p-6">
-                  <h2 className="text-xl font-bold text-emerald-900 mb-3 line-clamp-2">
-                    {post.title}
-                  </h2>
-                  
-                  <p className="text-emerald-700 mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
-                  
-                  <div className="flex items-center text-sm text-emerald-600 mb-4 space-x-4">
-                    <div className="flex items-center">
-                      <UserIcon className="h-4 w-4 mr-1" />
-                      {post.author}
-                    </div>
-                    <div className="flex items-center">
-                      <CalendarIcon className="h-4 w-4 mr-1" />
-                      {formatDate(post.date)}
-                    </div>
-                    <div className="flex items-center">
-                      <ClockIcon className="h-4 w-4 mr-1" />
-                      {post.readTime}
-                    </div>
+                <div className="p-6 flex flex-col">
+                  <div className="h-32 overflow-hidden relative mb-4">
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2 line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-gray-600 text-sm line-clamp-3">
+                      {post.excerpt}
+                    </p>
                   </div>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.map((tag, index) => (
-                      <span 
-                        key={index}
-                        className="bg-emerald-50 text-emerald-600 px-2 py-1 rounded text-xs"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
+                  <div className="flex items-center justify-between mt-auto h-12">
+                    <div className="flex items-center text-emerald-600 text-sm">
+                      <TagIcon className="h-4 w-4 mr-1" />
+                      <span>{post.category}</span>
+                    </div>
+                    <Link href={`/blog/${post.id}`} className="text-white bg-emerald-600 hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-colors duration-200">
+                      Czytaj więcej
+                    </Link>
                   </div>
-                  
-                  <Link 
-                    href={`/blog/${post.id}`}
-                    className="inline-block bg-emerald-700 text-white px-4 py-2 rounded-md hover:bg-emerald-800 transition-colors duration-300"
-                  >
-                    Czytaj więcej
-                  </Link>
                 </div>
               </article>
             ))}
@@ -259,26 +236,6 @@ export default function BlogPage() {
               </p>
             </div>
           )}
-        </div>
-      </div>
-
-      {/* Newsletter Section */}
-      <div className="py-16 bg-emerald-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Zapisz się do newslettera</h2>
-          <p className="text-xl mb-8">
-            Otrzymuj najnowsze artykuły, poradniki i informacje o nowych herbatach prosto na swoją skrzynkę.
-          </p>
-          <div className="max-w-md mx-auto flex">
-            <input 
-              type="email" 
-              placeholder="Twój adres email"
-              className="flex-1 px-4 py-3 rounded-l-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-300"
-            />
-            <button className="bg-emerald-800 hover:bg-emerald-900 px-6 py-3 rounded-r-md transition-colors duration-300">
-              Zapisz się
-            </button>
-          </div>
         </div>
       </div>
     </div>

@@ -72,7 +72,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeFromCart = (productId: number) => {
-    setCartItems(prevItems => prevItems.filter(item => item.product.id !== productId));
+    if (window.confirm('Czy na pewno chcesz usunąć ten produkt z koszyka?')) {
+      setCartItems(prevItems => prevItems.filter(item => item.product.id !== productId));
+    }
   };
 
   const updateQuantity = (productId: number, quantity: number) => {
@@ -91,7 +93,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const clearCart = () => {
-    setCartItems([]);
+    if (window.confirm('Czy na pewno chcesz wyczyścić cały koszyk?')) {
+      setCartItems([]);
+    }
   };
 
   const getTotalPrice = () => {

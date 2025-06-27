@@ -120,15 +120,15 @@ export default function CartPage() {
                           <div className="flex items-center border border-gray-300 rounded-md">
                             <button
                               onClick={() => handleQuantityChange(item.product.id, item.quantity - 1)}
-                              className="p-2 hover:bg-gray-100 transition-colors duration-200"
+                              className="p-2 hover:bg-gray-200 text-gray-900 transition-colors duration-200"
                               aria-label="Zmniejsz ilość"
                             >
                               <MinusIcon className="h-4 w-4" />
                             </button>
-                            <span className="px-4 py-2 text-center min-w-[3rem]">{item.quantity}</span>
+                            <span className="px-4 py-2 text-center min-w-[3rem] text-gray-900 font-semibold">{item.quantity}</span>
                             <button
                               onClick={() => handleQuantityChange(item.product.id, item.quantity + 1)}
-                              className="p-2 hover:bg-gray-100 transition-colors duration-200"
+                              className="p-2 hover:bg-gray-200 text-gray-900 transition-colors duration-200"
                               aria-label="Zwiększ ilość"
                             >
                               <PlusIcon className="h-4 w-4" />
@@ -171,8 +171,8 @@ export default function CartPage() {
             
             <div className="border-t border-gray-200 pt-4 mb-6">
               <div className="flex justify-between text-lg font-semibold">
-                <span>Łącznie:</span>
-                <span className="text-emerald-600">{getTotalPrice().toFixed(2)} zł</span>
+                <span className="text-gray-900">Łącznie:</span>
+                <span className="text-emerald-600 font-bold">{getTotalPrice().toFixed(2)} zł</span>
               </div>
             </div>
             

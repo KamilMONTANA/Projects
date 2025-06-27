@@ -29,7 +29,7 @@ export default function AboutUsSection() {
               Dbamy o najwyższą jakość naszych produktów, współpracując bezpośrednio z plantatorami i wybierając tylko najlepsze liście. Naszym celem jest zapewnienie Ci niezapomnianych doznań smakowych i zapachowych, które sprawią, że każda filiżanka herbaty stanie się wyjątkowym momentem relaksu i przyjemności.
             </p>
             <Link 
-              href="/about-us" 
+              href="/about" 
               className="text-emerald-600 hover:text-emerald-800 font-medium transition-colors duration-300 inline-flex items-center"
               aria-label="Dowiedz się więcej o nas"
             >

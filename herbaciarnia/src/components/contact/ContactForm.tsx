@@ -68,7 +68,7 @@ export const ContactForm = () => {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-gray-900 mb-1">
               Imię i nazwisko
             </label>
             <input
@@ -77,10 +77,11 @@ export const ContactForm = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-md focus:ring-emerald-600 focus:border-emerald-600 ${errors.name ? 'border-red-500' : 'border-emerald-200'}`}
+              className={`w-full px-4 py-2 border rounded-md focus:ring-emerald-600 focus:border-emerald-600 bg-white text-gray-900 placeholder-gray-600 ${errors.name ? 'border-red-500' : 'border-emerald-200'}`}
               aria-invalid={!!errors.name}
               aria-describedby={errors.name ? 'name-error' : undefined}
               required
+              placeholder="Twoje imię i nazwisko"
             />
             {errors.name && (
               <p id="name-error" className="mt-1 text-sm text-red-600">
@@ -90,7 +91,7 @@ export const ContactForm = () => {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-900 mb-1">
               Email
             </label>
             <input
@@ -99,10 +100,11 @@ export const ContactForm = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-md focus:ring-emerald-600 focus:border-emerald-600 ${errors.email ? 'border-red-500' : 'border-emerald-200'}`}
+              className={`w-full px-4 py-2 border rounded-md focus:ring-emerald-600 focus:border-emerald-600 bg-white text-gray-900 placeholder-gray-600 ${errors.email ? 'border-red-500' : 'border-emerald-200'}`}
               aria-invalid={!!errors.email}
               aria-describedby={errors.email ? 'email-error' : undefined}
               required
+              placeholder="Twój adres email"
             />
             {errors.email && (
               <p id="email-error" className="mt-1 text-sm text-red-600">
@@ -112,7 +114,7 @@ export const ContactForm = () => {
           </div>
 
           <div>
-            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="subject" className="block text-sm font-medium text-gray-900 mb-1">
               Temat
             </label>
             <input
@@ -121,10 +123,11 @@ export const ContactForm = () => {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-md focus:ring-emerald-600 focus:border-emerald-600 ${errors.subject ? 'border-red-500' : 'border-emerald-200'}`}
+              className={`w-full px-4 py-2 border rounded-md focus:ring-emerald-600 focus:border-emerald-600 bg-white text-gray-900 placeholder-gray-600 ${errors.subject ? 'border-red-500' : 'border-emerald-200'}`}
               aria-invalid={!!errors.subject}
               aria-describedby={errors.subject ? 'subject-error' : undefined}
               required
+              placeholder="Temat wiadomości"
             />
             {errors.subject && (
               <p id="subject-error" className="mt-1 text-sm text-red-600">
@@ -134,7 +137,7 @@ export const ContactForm = () => {
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="message" className="block text-sm font-medium text-gray-900 mb-1">
               Wiadomość
             </label>
             <textarea
@@ -143,7 +146,7 @@ export const ContactForm = () => {
               rows={4}
               value={formData.message}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-md focus:ring-emerald-600 focus:border-emerald-600 ${errors.message ? 'border-red-500' : 'border-emerald-200'}`}
+              className={`w-full px-4 py-2 border rounded-md focus:ring-emerald-600 focus:border-emerald-600 bg-white text-gray-900 placeholder-gray-600 ${errors.message ? 'border-red-500' : 'border-emerald-200'}`}
               aria-invalid={!!errors.message}
               aria-describedby={errors.message ? 'message-error' : undefined}
               required
@@ -153,6 +156,7 @@ export const ContactForm = () => {
                 target.style.height = 'auto';
                 target.style.height = `${target.scrollHeight}px`;
               }}
+              placeholder="Twoja wiadomość"
             />
             {errors.message && (
               <p id="message-error" className="mt-1 text-sm text-red-600">
