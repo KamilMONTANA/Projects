@@ -133,8 +133,9 @@ export default function ProfilePage() {
   const [orders, setOrders] = useState<Order[]>(mockOrders);
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState(user);
-  
+
   const { favorites } = useFavorites();
+  const products = getAllProducts();
   const profileRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 

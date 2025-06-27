@@ -373,9 +373,8 @@ export default function BlogPostPage() {
                       </div>
                     </div>
                   </Link>
-                ))
-              )}
-            </div>
+                ))}
+              </div>
           </div>
         </div>
       </div>
