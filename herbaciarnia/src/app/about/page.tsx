@@ -211,25 +211,28 @@ export default function AboutPage() {
       </div>
 
       {/* Certyfikaty Section */}
-      <div className="py-16 bg-emerald-600 text-white">
+      <div className="py-16 bg-emerald-800 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8">Certyfikaty i Nagrody</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-emerald-700 p-6 rounded-lg">
+            <div className="bg-emerald-900 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-3">Certyfikat Bio</h3>
               <p>Wszystkie nasze herbaty ekologiczne posiadają certyfikat Bio zgodny z normami UE.</p>
             </div>
-            <div className="bg-emerald-700 p-6 rounded-lg">
+            <div className="bg-emerald-900 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-3">Fair Trade</h3>
               <p>Współpracujemy tylko z plantacjami, które zapewniają uczciwe warunki pracy.</p>
             </div>
-            <div className="bg-emerald-700 p-6 rounded-lg">
+            <div className="bg-emerald-900 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-3">Nagroda Konsumentów</h3>
               <p>Zdobywca nagrody "Najlepsza Herbaciarnia Roku 2023" w plebiscycie konsumenckim.</p>
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Separator */}
+      <div className="bg-emerald-50 h-16"></div>
     </div>
   );
 }

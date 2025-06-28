@@ -31,14 +31,48 @@ body {
 }
 
 /* Niestandardowe style dla karuzeli Slick */
+.slick-prev,
+.slick-next {
+  width: 40px !important;
+  height: 40px !important;
+  background: #059669 !important;
+  border-radius: 50% !important;
+  z-index: 10 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s ease !important;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  background: #047857 !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: white !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+.slick-prev {
+  left: -50px !important;
+}
+
+.slick-next {
+  right: -50px !important;
+}
+
+.slick-dots {
+  bottom: -40px !important;
+}
+
 .slick-dots li button:before {
-  color: var(--primary);
+  color: #059669 !important;
+  font-size: 12px !important;
 }
 
 .slick-dots li.slick-active button:before {
-  color: var(--primary-dark);
-}
-
-.slick-prev:before, .slick-next:before {
-  color: var(--primary);
+  color: #047857 !important;
 }

@@ -4,8 +4,11 @@ import Link from 'next/link';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { useFavorites } from '@/app/context/FavoritesContext';
 import ProductCard from '@/components/products/ProductCard';
+import { Product } from '@/lib/products';
 // @ts-ignore
 import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 /**
  * Favorites section component for the home page
@@ -43,18 +46,19 @@ export default function FavoritesSection() {
       ) : (
         <Slider
           dots={true}
-          infinite={favorites.length > 3}
+          infinite={false}
           speed={500}
-          slidesToShow={Math.min(3.5, favorites.length)}
+          slidesToShow={3}
           slidesToScroll={1}
-          autoplay={true}
+          autoplay={false}
           autoplaySpeed={5000}
           centerMode={false}
+          arrows={true}
           responsive={[
             {
               breakpoint: 1024,
               settings: {
-                slidesToShow: Math.min(2.5, favorites.length),
+                slidesToShow: 2,
                 slidesToScroll: 1,
               },
             },
@@ -68,9 +72,9 @@ export default function FavoritesSection() {
           ]}
         >
           {favorites.map((product) => (
-            <div key={product.id} className="px-2 w-full h-full">
-              <div className="h-full">
-                <ProductCard product={product} />
+            <div key={product.id} className="px-2 h-full">
+              <div className="h-full max-w-xs">
+                <ProductCard product={product as Product} />
               </div>
             </div>
           ))}

@@ -21,7 +21,7 @@ const allProducts: Product[] = [
     id: 1,
     name: 'Zielona herbata Sencha',
     price: 24.99,
-    image: '/herbata1.jpg',
+    image: '/images/herbata1.jpg',
     category: 'zielona',
     promotion: false,
     description: 'Klasyczna japońska zielona herbata o świeżym, trawiastym aromacie i łagodnym smaku.',
@@ -33,7 +33,7 @@ const allProducts: Product[] = [
     id: 2,
     name: 'Czarna herbata Earl Grey',
     price: 19.99,
-    image: '/herbata2.jpg',
+    image: '/images/herbata2.jpg',
     category: 'czarna',
     promotion: false,
     description: 'Aromatyczna czarna herbata z dodatkiem olejku bergamotowego, idealna na popołudnie.',
@@ -45,7 +45,7 @@ const allProducts: Product[] = [
     id: 3,
     name: 'Biała herbata Silver Needle',
     price: 29.99,
-    image: '/herbata3.jpg',
+    image: '/images/herbata3.jpg',
     category: 'biała',
     promotion: true,
     priceBeforePromotion: 39.99,
@@ -58,7 +58,7 @@ const allProducts: Product[] = [
     id: 4,
     name: 'Herbata Oolong',
     price: 27.99,
-    image: '/herbata4.jpg',
+    image: '/images/herbata4.jpg',
     category: 'oolong',
     promotion: false,
     description: 'Półfermentowana herbata o złożonym smaku, łącząca cechy herbat zielonych i czarnych.',
@@ -70,7 +70,7 @@ const allProducts: Product[] = [
     id: 5,
     name: 'Herbata Rooibos',
     price: 22.99,
-    image: '/herbata5.jpg',
+    image: '/images/herbata5.jpg',
     category: 'ziołowa',
     promotion: true,
     priceBeforePromotion: 29.99,
@@ -83,7 +83,7 @@ const allProducts: Product[] = [
     id: 6,
     name: 'Matcha Premium',
     price: 49.99,
-    image: '/herbata6.jpg',
+    image: '/images/herbata6.jpg',
     category: 'zielona',
     promotion: false,
     description: 'Wysokiej jakości sproszkowana zielona herbata, tradycyjnie używana w japońskiej ceremonii parzenia herbaty.',
@@ -95,7 +95,7 @@ const allProducts: Product[] = [
     id: 7,
     name: 'Czarna herbata Assam',
     price: 18.99,
-    image: '/herbata7.jpg',
+    image: '/images/herbata7.jpg',
     category: 'czarna',
     promotion: false,
     description: 'Mocna czarna herbata z regionu Assam w Indiach, idealna na poranną filiżankę.',
@@ -107,7 +107,7 @@ const allProducts: Product[] = [
     id: 8,
     name: 'Ziołowa herbata miętowa',
     price: 15.99,
-    image: '/herbata8.jpg',
+    image: '/images/herbata8.jpg',
     category: 'ziołowa',
     promotion: false,
     description: 'Orzeźwiająca herbata miętowa, doskonała na trawienie i relaks.',
@@ -119,7 +119,7 @@ const allProducts: Product[] = [
     id: 9,
     name: 'Herbata jaśminowa',
     price: 26.99,
-    image: '/herbata9.jpg',
+    image: '/images/herbata9.jpg',
     category: 'zielona',
     promotion: true,
     priceBeforePromotion: 32.99,
@@ -132,7 +132,7 @@ const allProducts: Product[] = [
     id: 10,
     name: 'Herbata Chai',
     price: 23.99,
-    image: '/herbata10.jpg',
+    image: '/images/herbata10.jpg',
     category: 'czarna',
     promotion: false,
     description: 'Indyjska herbata korzenna z cynamonem, kardamonem, imbirem i goździkami.',
@@ -144,7 +144,7 @@ const allProducts: Product[] = [
     id: 11,
     name: 'Herbata Pu-erh',
     price: 34.99,
-    image: '/herbata11.jpg',
+    image: '/images/herbata11.jpg',
     category: 'pu-erh',
     promotion: false,
     description: 'Fermentowana herbata o ziemistym smaku, ceniona za właściwości wspomagające trawienie.',
@@ -156,7 +156,7 @@ const allProducts: Product[] = [
     id: 12,
     name: 'Herbata z owoców leśnych',
     price: 17.99,
-    image: '/herbata12.jpg',
+    image: '/images/herbata12.jpg',
     category: 'owocowa',
     promotion: true,
     priceBeforePromotion: 21.99,
@@ -169,7 +169,7 @@ const allProducts: Product[] = [
 
 // Opcje sortowania
 export const sortingOptions = [
-  { id: 'popularity-desc', name: 'Najpopularniejsze' },
+  { id: 'popularnosc-desc', name: 'Najpopularniejsze' },
   { id: 'price-asc', name: 'Cena: od najniższej' },
   { id: 'price-desc', name: 'Cena: od najwyższej' },
   { id: 'name-asc', name: 'Nazwa: A-Z' },
@@ -212,81 +212,61 @@ export const getProductById = (id: number): Product | undefined => {
 };
 
 export function filterProducts(products: Product[], filters: {
-  category?: string;
-  priceRange?: [number, number];
-  sortBy?: string;
-  searchQuery?: string;
+  wyszukiwanie?: string;
+  kategoria?: string;
+  pokazPromocje?: boolean;
+  zakresyCen?: [number, number];
+  sortowanie?: string;
 }): Product[] {
   let filtered = [...products];
 
-  // Filter by category
-  if (filters.category && filters.category !== 'all') {
-    filtered = filtered.filter(product => product.category === filters.category);
-  }
-
-  return filtered;
-}
-
-// Function to filter products
-export const filterProductsLegacy = ({
-  searchTerm = '',
-  category = 'all',
-  showPromotion = false,
-  priceRange = [0, 100],
-  sortBy = 'popularity-desc'
-}: {
-  searchTerm?: string;
-  category?: string;
-  showPromotion?: boolean;
-  priceRange?: [number, number];
-  sortBy?: string;
-}) => {
-  let filteredProducts = [...allProducts];
-  
   // Filter by search term
-  if (searchTerm) {
-    const searchQuery = searchTerm.toLowerCase();
-    filteredProducts = filteredProducts.filter(p => 
+  if (filters.wyszukiwanie) {
+    const searchQuery = filters.wyszukiwanie.toLowerCase();
+    filtered = filtered.filter(p => 
       p.name.toLowerCase().includes(searchQuery) || 
       p.description.toLowerCase().includes(searchQuery) ||
       p.category.toLowerCase().includes(searchQuery)
     );
   }
-  
+
   // Filter by category
-  if (category !== 'all') {
-    filteredProducts = filteredProducts.filter(p => p.category === category);
+  if (filters.kategoria && filters.kategoria !== 'all') {
+    filtered = filtered.filter(product => product.category === filters.kategoria);
   }
-  
+
   // Filter by promotion
-  if (showPromotion) {
-    filteredProducts = filteredProducts.filter(p => p.promotion);
+  if (filters.pokazPromocje) {
+    filtered = filtered.filter(p => p.promotion);
   }
-  
-  // Filter by price
-  filteredProducts = filteredProducts.filter(p => 
-    p.price >= priceRange[0] && p.price <= priceRange[1]
-  );
-  
+
+  // Filter by price range
+  if (filters.zakresyCen && Array.isArray(filters.zakresyCen)) {
+    const [min, max] = filters.zakresyCen;
+    filtered = filtered.filter(p => p.price >= min && p.price <= max);
+  }
+
   // Sorting
-  const [field, direction] = sortBy.split('-');
-  filteredProducts.sort((a, b) => {
-    if (field === 'price') {
-      return direction === 'asc' ? a.price - b.price : b.price - a.price;
-    } else if (field === 'name') {
-      return direction === 'asc' 
-        ? a.name.localeCompare(b.name) 
-        : b.name.localeCompare(a.name);
-    } else if (field === 'popularity') {
-      return direction === 'asc' 
-        ? a.popularity - b.popularity 
-        : b.popularity - a.popularity;
-    }
-    return 0;
-  });
-  
-  return filteredProducts;
-};
+  if (filters.sortowanie) {
+    const [field, direction] = filters.sortowanie.split('-');
+    filtered.sort((a, b) => {
+      if (field === 'price') {
+        return direction === 'asc' ? a.price - b.price : b.price - a.price;
+      } else if (field === 'name') {
+        return direction === 'asc' 
+          ? a.name.localeCompare(b.name) 
+          : b.name.localeCompare(a.name);
+      } else if (field === 'popularnosc') {
+        return direction === 'asc' 
+          ? a.popularity - b.popularity 
+          : b.popularity - a.popularity;
+      }
+      return 0;
+    });
+  }
+
+  return filtered;
+}
 
 // Function to get the price range
 export const getPriceRange = (): [number, number] => {

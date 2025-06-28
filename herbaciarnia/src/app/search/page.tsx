@@ -6,10 +6,7 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { gsap } from 'gsap';
 import { 
-  MagnifyingGlassIcon,
-  FunnelIcon,
-  XMarkIcon,
-  AdjustmentsHorizontalIcon
+  MagnifyingGlassIcon
 } from '@heroicons/react/24/outline';
 import { getAllProducts } from '@/lib/products';
 import ProductCard from '@/components/products/ProductCard';
@@ -36,16 +33,24 @@ const sortOptions: SortOption[] = [
 ];
 
 const categories = [
-  'Herbata czarna',
-  'Herbata zielona',
-  'Herbata biała',
-  'Herbata oolong',
-  'Herbata pu-erh',
-  'Rooibos',
-  'Yerba mate',
-  'Herbatki ziołowe',
-  'Akcesoria'
+  'zielona',
+  'czarna', 
+  'biała',
+  'oolong',
+  'pu-erh',
+  'ziołowa',
+  'owocowa'
 ];
+
+const categoryLabels: { [key: string]: string } = {
+  'zielona': 'Herbata zielona',
+  'czarna': 'Herbata czarna',
+  'biała': 'Herbata biała',
+  'oolong': 'Herbata oolong',
+  'pu-erh': 'Herbata pu-erh',
+  'ziołowa': 'Herbata ziołowa',
+  'owocowa': 'Herbata owocowa'
+};
 
 export default function SearchPage() {
   return (
@@ -61,7 +66,6 @@ function SearchPageContent() {
   
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [sortBy, setSortBy] = useState('name-asc');
-  const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<FilterOptions>({
     category: [],
     priceRange: [0, 500],
@@ -112,10 +116,10 @@ function SearchPageContent() {
       product.price <= filters.priceRange[1];
     
     // Stock filter
-    const matchesStock = !filters.inStock || product.inStock;
+    const matchesStock = !filters.inStock || product.availability;
     
     // Sale filter
-    const matchesSale = !filters.onSale || product.isOnSale;
+    const matchesSale = !filters.onSale || product.promotion;
     
     return matchesSearch && matchesCategory && matchesPrice && matchesStock && matchesSale;
   });
@@ -132,9 +136,9 @@ function SearchPageContent() {
       case 'price-desc':
         return b.price - a.price;
       case 'newest':
-        return new Date(b.createdAt || '').getTime() - new Date(a.createdAt || '').getTime();
+        return b.id - a.id;
       case 'popular':
-        return (b.rating || 0) - (a.rating || 0);
+        return b.popularity - a.popularity;
       default:
         return 0;
     }
@@ -158,27 +162,21 @@ function SearchPageContent() {
     });
   };
 
-  const activeFiltersCount = 
-    filters.category.length + 
-    (filters.inStock ? 1 : 0) + 
-    (filters.onSale ? 1 : 0) +
-    (filters.priceRange[0] > 0 || filters.priceRange[1] < 500 ? 1 : 0);
-
   return (
-    <div ref={searchRef} className="min-h-screen bg-gray-50 py-8">
+    <div ref={searchRef} className="min-h-screen bg-emerald-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Search Header */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
             <div className="flex-1 max-w-2xl">
               <div className="relative">
-                <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-emerald-500" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Szukaj herbat, akcesoriów..."
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent placeholder-emerald-300"
                 />
               </div>
             </div>
@@ -187,7 +185,7 @@ function SearchPageContent() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-emerald-50 text-emerald-800"
               >
                 {sortOptions.map(option => (
                   <option key={option.value} value={option.value}>
@@ -195,31 +193,14 @@ function SearchPageContent() {
                   </option>
                 ))}
               </select>
-              
-              <button
-                onClick={() => setShowFilters(!showFilters)}
-                className={`flex items-center px-4 py-2 rounded-lg transition-colors duration-200 ${
-                  showFilters || activeFiltersCount > 0
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                <FunnelIcon className="h-5 w-5 mr-2" />
-                Filtry
-                {activeFiltersCount > 0 && (
-                  <span className="ml-2 bg-white text-emerald-600 text-xs rounded-full px-2 py-1">
-                    {activeFiltersCount}
-                  </span>
-                )}
-              </button>
             </div>
           </div>
           
           {/* Search Results Info */}
-          <div className="mt-4 text-sm text-gray-600">
+          <div className="mt-4 text-sm text-emerald-700">
             {searchQuery && (
               <p>
-                Wyniki wyszukiwania dla: <span className="font-semibold">"{searchQuery}"</span>
+                Wyniki wyszukiwania dla: <span className="font-semibold text-emerald-800">"{searchQuery}"</span>
               </p>
             )}
             <p className="mt-1">
@@ -229,12 +210,12 @@ function SearchPageContent() {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Filters Sidebar */}
-          <div className={`lg:w-64 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-8">
+          {/* Filters Sidebar - zawsze widoczny */}
+          <div className="lg:w-64">
+            <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900">Filtry</h3>
-                {activeFiltersCount > 0 && (
+                <h3 className="text-lg font-semibold text-emerald-800">Filtry</h3>
+                {sortedProducts.length > 0 && (
                   <button
                     onClick={clearFilters}
                     className="text-sm text-emerald-600 hover:text-emerald-700"
@@ -246,8 +227,8 @@ function SearchPageContent() {
               
               {/* Category Filter */}
               <div className="mb-6">
-                <h4 className="text-md font-medium text-gray-900 mb-3">Kategoria</h4>
-                <div className="space-y-2 max-h-48 overflow-y-auto">
+                <h4 className="text-md font-medium text-emerald-800 mb-3">Kategoria</h4>
+                <div className="space-y-2">
                   {categories.map(category => (
                     <label key={category} className="flex items-center">
                       <input
@@ -256,7 +237,7 @@ function SearchPageContent() {
                         onChange={() => handleCategoryChange(category)}
                         className="mr-2 text-emerald-600 focus:ring-emerald-500"
                       />
-                      <span className="text-sm text-gray-700">{category}</span>
+                      <span className="text-sm text-emerald-700">{categoryLabels[category]}</span>
                     </label>
                   ))}
                 </div>
@@ -264,7 +245,7 @@ function SearchPageContent() {
               
               {/* Price Range Filter */}
               <div className="mb-6">
-                <h4 className="text-md font-medium text-gray-900 mb-3">Zakres cen</h4>
+                <h4 className="text-md font-medium text-emerald-800 mb-3">Zakres cen</h4>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-2">
                     <input
@@ -274,10 +255,11 @@ function SearchPageContent() {
                         ...prev,
                         priceRange: [Number(e.target.value), prev.priceRange[1]]
                       }))}
-                      className="w-20 px-2 py-1 border border-gray-300 rounded text-sm"
+                      className="w-20 px-2 py-1 border border-emerald-200 rounded text-sm focus:ring-emerald-500 focus:border-emerald-500 placeholder-emerald-300 text-emerald-800"
                       min="0"
+                      placeholder="0"
                     />
-                    <span className="text-gray-500">-</span>
+                    <span className="text-emerald-600">-</span>
                     <input
                       type="number"
                       value={filters.priceRange[1]}
@@ -285,10 +267,11 @@ function SearchPageContent() {
                         ...prev,
                         priceRange: [prev.priceRange[0], Number(e.target.value)]
                       }))}
-                      className="w-20 px-2 py-1 border border-gray-300 rounded text-sm"
+                      className="w-20 px-2 py-1 border border-emerald-200 rounded text-sm focus:ring-emerald-500 focus:border-emerald-500 placeholder-emerald-300 text-emerald-800"
                       min="0"
+                      placeholder="500"
                     />
-                    <span className="text-sm text-gray-500">zł</span>
+                    <span className="text-sm text-emerald-600">zł</span>
                   </div>
                   <input
                     type="range"
@@ -299,7 +282,7 @@ function SearchPageContent() {
                       ...prev,
                       priceRange: [prev.priceRange[0], Number(e.target.value)]
                     }))}
-                    className="w-full"
+                    className="w-full h-2 bg-emerald-200 rounded-lg appearance-none cursor-pointer"
                   />
                 </div>
               </div>
@@ -313,7 +296,7 @@ function SearchPageContent() {
                     onChange={(e) => setFilters(prev => ({ ...prev, inStock: e.target.checked }))}
                     className="mr-2 text-emerald-600 focus:ring-emerald-500"
                   />
-                  <span className="text-sm text-gray-700">Tylko dostępne</span>
+                  <span className="text-sm text-emerald-700">Tylko dostępne</span>
                 </label>
                 
                 <label className="flex items-center">
@@ -323,7 +306,7 @@ function SearchPageContent() {
                     onChange={(e) => setFilters(prev => ({ ...prev, onSale: e.target.checked }))}
                     className="mr-2 text-emerald-600 focus:ring-emerald-500"
                   />
-                  <span className="text-sm text-gray-700">W promocji</span>
+                  <span className="text-sm text-emerald-700">W promocji</span>
                 </label>
               </div>
             </div>
@@ -339,11 +322,11 @@ function SearchPageContent() {
               </div>
             ) : (
               <div className="bg-white rounded-lg shadow-md p-12 text-center">
-                <MagnifyingGlassIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <MagnifyingGlassIcon className="h-16 w-16 text-emerald-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-emerald-800 mb-2">
                   Nie znaleziono produktów
                 </h3>
-                <p className="text-gray-600 mb-6">
+                <p className="text-emerald-600 mb-6">
                   Spróbuj zmienić kryteria wyszukiwania lub filtry
                 </p>
                 <button
@@ -351,7 +334,7 @@ function SearchPageContent() {
                     setSearchQuery('');
                     clearFilters();
                   }}
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg transition-colors duration-300"
                 >
                   Wyczyść wyszukiwanie
                 </button>

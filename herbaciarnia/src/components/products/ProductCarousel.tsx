@@ -16,12 +16,13 @@ import 'slick-carousel/slick/slick-theme.css';
 const ProductCarousel = ({ title, products }: { title: string; products: Product[] }) => {
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
+    arrows: true,
     responsive: [
       {
         breakpoint: 1024,

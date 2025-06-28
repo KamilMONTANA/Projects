@@ -1,10 +1,13 @@
 'use client';
 
+
 import { Product, getAllProducts } from '@/lib/products';
 import HeroSection from '@/components/home/HeroSection';
 import FavoritesSection from '@/components/home/FavoritesSection';
 import AboutUsSection from '@/components/home/AboutUsSection';
 import ProductCarousel from '@/components/products/ProductCarousel';
+
+
 
 /**
  * Strona główna herbaciarni

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ShoppingBagIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/outline';
@@ -18,6 +19,7 @@ export default function ProductPage() {
   const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const { addToFavorites, removeFromFavorites, isFavorite } = useFavorites();
   const { addToCart, isInCart } = useCart();
   
@@ -69,13 +71,18 @@ export default function ProductPage() {
       addToCart({
         ...product,
         description: product.description || '', // Ensure description is never undefined
-        availability: product.availability ?? true // Ensure availability is always boolean
+        availability: product.availability ?? true, // Ensure availability is always boolean
+        popularity: product.popularity ?? 4.5 // Ensure popularity is always number
       });
     }
     
     setTimeout(() => {
       setIsAddingToCart(false);
     }, 1000);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
   };
   
   if (!product) {
@@ -115,11 +122,30 @@ export default function ProductPage() {
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Obraz produktu */}
           <div ref={imageRef} className="bg-white p-6 rounded-lg shadow-lg overflow-hidden">
-            <img 
-              src={product.image}
-              alt={product.name}
-              className="w-full h-auto object-cover rounded-md transform hover:scale-105 transition-transform duration-500 ease-in-out"
-            />
+            <div className="relative w-full h-96">
+              {!imageError ? (
+                <Image 
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover rounded-md transform hover:scale-105 transition-transform duration-500 ease-in-out"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={true}
+                  onError={handleImageError}
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center rounded-md">
+                  <div className="text-center">
+                    <div className="w-24 h-24 bg-emerald-200 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-12 h-12 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                      </svg>
+                    </div>
+                    <span className="text-emerald-700 font-medium">Obraz produktu</span>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Informacje o produkcie */}
